@@ -29,7 +29,7 @@ const userSchema= new Schema({
         trim:true
     },
     salt: String,
-    role:{      //defining preveliges 
+    role:{      //defining priveleges 
         type:Number,
         default:0    //0 indicate basic user
     },
