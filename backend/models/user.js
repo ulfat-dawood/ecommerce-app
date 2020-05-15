@@ -1,4 +1,6 @@
 const mongoose= require('mongoose');
+const crypto= require('crypto'); 
+const uuidv1= require('uuid/v1');
  
 const Schema = mongoose.Schema; 
 
@@ -24,9 +26,9 @@ const userSchema= new Schema({
         type : String,
         trim: true
     },
-    password:{
+    encry_password:{
         type:String,
-        trim:true
+        required: true
     },
     salt: String,
     role:{      //defining priveleges 
@@ -37,6 +39,40 @@ const userSchema= new Schema({
         type: Array,
         default: []
     }
+},
+{
+    timestamps: true
 })
 
-module.exports= mongoose.model('user', userSchema, 'users')
+//create virtual field called 'password'
+userSchema.virtual('password')
+.set(function(password){ //setter: store the value in th DB
+    this._password= password; //private fields start with underscore
+    this.salt= uuidv1(); 
+    this.encry_password= this.securePassword(password);
+} )
+.get(function(){//getter: populate the value from DB
+    return this._password
+})
+
+userSchema.method= {
+    //this method will be used when authenticating user on login
+    authenticate: function(plainpassword){ //take plain password from user
+        return this.securePassword(plainpassword) === this.encry_password;
+    },
+    securePassword: function(plainpassword){
+        if(!password) return ""; 
+        try{
+            return crypto
+            .createHmac('sha256', this.salt)
+            .update(plainPassword)
+            .digest('hex');
+
+        }catch(err){
+            return "";
+
+        }
+    }
+}
+
+module.exports= mongoose.model('User', userSchema)
