@@ -23,7 +23,7 @@ const productSchema= new Schema({
     },
     category:{
         type:ObjectId,
-        ref:'Categoty',
+        ref:'Categoty', //Model name in category schema 
         required:true
     },
     stock: Number,
