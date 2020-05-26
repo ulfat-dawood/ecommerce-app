@@ -23,6 +23,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
 
+//My Routes      //midllewares via app.use()
+app.use('/api', authRoute)
 
 app.get('/hello', (req,res)=> res.send('Hello Express'));
 
