@@ -1,6 +1,6 @@
 //export the module signout : 
 exports.signup = (req, res)=>{
-    console.log('up')
+    console.log('REQ BODY', req.body)
 
     res.send('HOla');
 }
