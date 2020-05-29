@@ -26,7 +26,7 @@ const userSchema= new Schema({
         type : String,
         trim: true
     },
-    encry_password:{
+    encry_password:{ //we don't set this value, we take 'password' virtual field as input
         type:String,
         required: true
     },
@@ -55,13 +55,13 @@ userSchema.virtual('password')
     return this._password
 })
 
-userSchema.method= {
+userSchema.methods= {
     //this method will be used when authenticating user on login
     authenticate: function(plainpassword){ //take plain password from user
         return this.securePassword(plainpassword) === this.encry_password;
     },
     securePassword: function(plainpassword){
-        if(!password) return ""; 
+        if(!plainpassword) return ""; 
         try{
             return crypto
             .createHmac('sha256', this.salt)

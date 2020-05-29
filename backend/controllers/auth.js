@@ -1,8 +1,20 @@
+const User= require('../models/user'); 
+
+
+
 //export the module signout : 
 exports.signup = (req, res)=>{
-    console.log('REQ BODY', req.body)
-
-    res.send('HOla');
+    const user= new User(req.body);
+    
+    user.save((err, theSavedUserObj)=>{
+        if(err){
+            console.log(err); 
+            return res.status(400).json({
+                error: 'Not able to save user in db'
+            });//400=bad request
+        }
+        res.json(theSavedUserObj);
+    }); 
 }
 
 exports.signout = (req, res)=>{
