@@ -13,7 +13,11 @@ exports.signup = (req, res)=>{
                 error: 'Not able to save user in db'
             });//400=bad request
         }
-        res.json(theSavedUserObj);
+        res.json({
+            name:theSavedUserObj.name,
+            email: theSavedUserObj.email,
+            id: theSavedUserObj._id
+        });
     }); 
 }
 

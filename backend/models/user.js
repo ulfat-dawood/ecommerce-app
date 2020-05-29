@@ -45,34 +45,35 @@ const userSchema= new Schema({
 })
 
 //create virtual field called 'password'
-userSchema.virtual('password')
-.set(function(password){ //setter: store the value in th DB
-    this._password= password; //private fields start with underscore
-    this.salt= uuidv1(); 
-    this.encry_password= this.securePassword(password);
-} )
-.get(function(){//getter: populate the value from DB
-    return this._password
-})
+userSchema
+  .virtual("password")
+  .set(function(password) { //setter: store the value in th DB
+    this._password = password; //private fields start with underscore
+    this.salt = uuidv1();
+    this.encry_password = this.securePassword(password);
+  })
+  .get(function() { //getter: populate the value from DB
+    return this._password;
+  });
 
-userSchema.methods= {
+userSchema.methods = {
     //this method will be used when authenticating user on login
-    authenticate: function(plainpassword){ //take plain password from user
-        return this.securePassword(plainpassword) === this.encry_password;
-    },
-    securePassword: function(plainpassword){
-        if(!plainpassword) return ""; 
-        try{
-            return crypto
-            .createHmac('sha256', this.salt)
-            .update(plainPassword)
-            .digest('hex');
+  autheticate: function(plainpassword) { //take plain password from user
+    return this.securePassword(plainpassword) === this.encry_password;
+  },
 
-        }catch(err){
-            return "";
-
-        }
+  securePassword: function(plainpassword) {
+    if (!plainpassword) return "";
+    try {
+      return crypto
+        .createHmac("sha256", this.salt)
+        .update(plainpassword)
+        .digest("hex");
+    } catch (err) {
+      return "";
     }
-}
+  }
+};
+
 
 module.exports= mongoose.model('User', userSchema)
