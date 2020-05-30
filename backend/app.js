@@ -21,12 +21,12 @@ mongoose.connect(process.env.DATABASE,
 })
 
 //Middlewares
-app.use(bodyParser.json());
-app.use(cookieParser());
+app.use(bodyParser.json()); //no need to require anywhere else 
+app.use(cookieParser());  //no need to require anywhere else 
 app.use(cors());
 
 //My Routes      //midllewares via app.use()
-app.use('/api', authRoute)
+app.use('/api', authRoute) //signin, signout, signup
 
 app.get('/hello', (req,res)=> res.send('Hello Express'));
 

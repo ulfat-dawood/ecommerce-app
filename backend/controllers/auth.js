@@ -1,9 +1,28 @@
+const {check, validationResult}= require('express-validator');
+const jwt= require('jsonwebtoken'); 
+const expressJwt= require('express-jwt'); 
+
+const secretString= process.env.SECRET; 
+//import models:
 const User= require('../models/user'); 
 
 
 
 //export the module signout : 
 exports.signup = (req, res)=>{
+
+    //the request will pass the express-validator middleware first then come here
+    //errors returns json object that has error as an array 
+    const errors= validationResult(req);
+
+    //if errors array is not empty
+    if(!errors.isEmpty()){
+        //stop the function execution using return
+        return res.status(422).json({
+            field: errors.array()[0].param,
+            error: errors.array()[0].msg //convert the json value to js array
+        })
+    }
     const user= new User(req.body);
     
     user.save((err, theSavedUserObj)=>{
@@ -19,6 +38,46 @@ exports.signup = (req, res)=>{
             id: theSavedUserObj._id
         });
     }); 
+}
+
+exports.signin = (req, res)=>{
+    const {email, password}= req.body; 
+    const errors= validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(422).json({
+            field: errors.array()[0].param,
+            error: errors.array()[0].msg //convert the json value to js array
+        })
+    }
+
+    User.findOne({email:email}, (err, user)=>{
+        //if email not found:
+        if(err){
+            return res.status(400).json({
+                error: 'Email does not exist'
+            })
+        }
+        //if password not match
+        if(!user.authenticate(password)){ 
+            return res.statues(401).json({
+                error: 'Email and Password don\'t match' 
+            })
+        }
+        //email found + password matched=> generate token based on _id
+        const token= jwt.sign({id: user._id} , secretString); 
+
+        //store token in the browser cookie: 
+        res.cookie('token', token, {expire: new Date() + 9999}); 
+
+        //send to the fornend:
+        //user info + token to be stored in local storage
+        const {_id, email, name, role}= user; 
+        return res.json({
+            token, //shorthand for token:token 
+            user: {_id, email, name, role}
+        })
+    })
+
 }
 
 exports.signout = (req, res)=>{
