@@ -2,7 +2,7 @@ const express= require('express');
 const router= express.Router();
 const {check, validationResult}= require('express-validator');
 //modules of controllers: 
-const {signout,signup, signin }= require('../controllers/auth'); 
+const {signout,signup, signin, isSignedIn }= require('../controllers/auth'); 
 
 router.post('/signup',[
 check('name').isLength({min: 5}).withMessage('name should be at least 3 char') ,
@@ -20,5 +20,10 @@ router.post('/signin',[
 
 //pass the middleware CBF signout(): 
 router.get('/signout', signout)
+
+//Middleware for protected routes
+router.get('/test', isSignedIn, (req, res)=>{
+    return res.send('a protected route')
+}); 
 
 module.exports= router; 
