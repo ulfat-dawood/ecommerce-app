@@ -82,7 +82,9 @@ exports.signin = (req, res)=>{
 }
 
 exports.signout = (req, res)=>{
-    console.log('out')
-
-    res.json({name: 'hola', age: 16});
+    //clear the 'token' cookie: 
+    res.clearCookie('token');
+    res.json({
+        msg:'You have been signed out!'
+    })
 }
