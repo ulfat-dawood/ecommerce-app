@@ -24,6 +24,7 @@ router.get('/signout', signout)
 //Middleware for protected routes
 router.get('/test', isSignedIn, (req, res)=>{
     return res.send('a protected route')
+    //no need for next() in this middleware, because expressJwt already has it
 }); 
 
 module.exports= router; 
