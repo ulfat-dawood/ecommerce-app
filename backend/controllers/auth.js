@@ -52,14 +52,14 @@ exports.signin = (req, res)=>{
 
     User.findOne({email:email}, (err, user)=>{
         //if email not found:
-        if(err){
+        if(err || !user){
             return res.status(400).json({
                 error: 'Email does not exist'
             })
         }
         //if password not match
-        if(!user.authenticate(password)){ 
-            return res.statues(401).json({
+        if(!user.autheticate(password)){ 
+            return res.status(401).json({
                 error: 'Email and Password don\'t match' 
             })
         }
@@ -67,11 +67,12 @@ exports.signin = (req, res)=>{
         const token= jwt.sign({id: user._id} , secretString); 
 
         //store token in the browser cookie: 
+        //3 param: name of the cookie field/ value of the cookie, expiry 
         res.cookie('token', token, {expire: new Date() + 9999}); 
 
         //send to the fornend:
         //user info + token to be stored in local storage
-        const {_id, email, name, role}= user; 
+        const {_id, email, name, role}= user; //destruturing
         return res.json({
             token, //shorthand for token:token 
             user: {_id, email, name, role}
