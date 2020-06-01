@@ -90,10 +90,21 @@ exports.signout = (req, res)=>{
 }
 
 
-//Protected routes middlewares 
+//Middlewares for protected routes  
 exports.isSignedIn= expressJwt({
     secret: secretString,
     userProperty: 'auth'
+     //no need for next() in this middleware, because expressJwt already has it
 })
+//Custom middlewares for protected routes  
+exports.isAuthenticated= (req, res, next)=>{
+    //in the frontend create a property 'profile' that is sent with the req
+    let checker= req.profile && req.auth ; //auth is coming from isSignedIn() 
 
-//Custom Middlewres
+    next();
+}
+
+exports.isAmin= (req, res, next)=>{
+
+    next();
+}
