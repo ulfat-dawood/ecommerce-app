@@ -99,8 +99,13 @@ exports.isSignedIn= expressJwt({
 //Custom middlewares for protected routes  
 exports.isAuthenticated= (req, res, next)=>{
     //in the frontend create a property 'profile' that is sent with the req
-    let checker= req.profile && req.auth ; //auth is coming from isSignedIn() 
-
+    //first check if profile & auth exist then check if _id matches 
+    let checker= req.profile && req.auth && req.profile._id === req.auth._id; //auth is coming from isSignedIn() 
+    if(!checker){
+        return res.status(403).json({
+            error: 'ACCESS DENIED'
+        })
+    }
     next();
 }
 
