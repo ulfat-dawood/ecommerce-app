@@ -12,5 +12,8 @@ exports.getUserById = (req, res, next, id)=>{
          req.profile= user; 
          next(); 
     })
+}
 
+exports.getUser= (req, res)=>{
+    return res.json(req.profile);
 }
