@@ -6,7 +6,7 @@ const cookieParser= require('cookie-parser');
 const cors= require('cors');
 //Routes:
 const authRoute= require('./routes/auth');
-const userRoute= require('/routes/user'); 
+const userRoute= require('./routes/user');
 
 const app = express()
 const port = process.env.PORT || 8000; 
