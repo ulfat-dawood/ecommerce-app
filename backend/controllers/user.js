@@ -1,6 +1,6 @@
 const User= require('../models/user'); 
 
-
+//this method is fired every time there's :userId in the rout
 exports.getUserById = (req, res, next, id)=>{
     User.findById(id).exec((err, user)=>{
         if(err || !user){ //if error or no user was found
@@ -8,9 +8,9 @@ exports.getUserById = (req, res, next, id)=>{
                 error: 'USER NOT FOUND'
             })
         }
-        //if no err and user found, store the user in th fronend 'profile' variable
-        //TODO: how is this shit working 
+        //if no err and user found, store the user in req.profile
          req.profile= user; 
+         //if route has :userId param, it has req.profile
          next(); 
     })
 }
@@ -23,13 +23,15 @@ exports.getUser= (req, res)=>{
     return res.json(req.profile);
 }
 
-exports.getAllUsers= (req,res)=>{
-    User.find().exec((err, users)=>{
-        if(err || !users){
-            return res.status(400).json({
-                error: 'Users not found'
-            })
+exports.updateUser=((req, res)=>{
+    User.findByIdAndUpdate(
+        {_id: req.profile.id}, 
+        {$set: req.body},
+        {new:true, useFindAndModify:false},
+        (err, user)=>{
+            if(err){
+                return res.status(400).json({})
+            }
         }
-        res.json(users);
-    })
-}
+    )
+})
