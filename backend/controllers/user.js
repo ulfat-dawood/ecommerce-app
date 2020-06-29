@@ -30,8 +30,13 @@ exports.updateUser=((req, res)=>{
         {new:true, useFindAndModify:false},
         (err, user)=>{
             if(err){
-                return res.status(400).json({})
+                return res.status(400).json({
+                    error: "you are not authorized to update this information"
+                })
             }
+            user.salt= undefined;
+            user.encry_password= undefined;
+            res.json(user)
         }
     )
 })
