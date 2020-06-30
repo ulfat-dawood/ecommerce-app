@@ -1,6 +1,8 @@
 const User= require('../models/user'); 
+const Order= require('../models/order'); 
 
-//this method is fired every time there's :userId in the rout
+//this middleware is fired every time there's :userId in the rout
+//this middleware will store all the user info in req.profile
 exports.getUserById = (req, res, next, id)=>{
     User.findById(id).exec((err, user)=>{
         if(err || !user){ //if error or no user was found
@@ -39,4 +41,8 @@ exports.updateUser=((req, res)=>{
             res.json(user)
         }
     )
+})
+
+exports.userPurchaseList=((req, res)=>{
+  return 1; 
 })
