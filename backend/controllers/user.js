@@ -44,5 +44,15 @@ exports.updateUser=((req, res)=>{
 })
 
 exports.userPurchaseList=((req, res)=>{
-  return 1; 
+  Order.find({user : req.profile._id}).populate('user', 'id name')//model, return field separed by space
+  .exec((err,order)=>{
+      if(err){
+          return res.status(400).json({
+              error:'no orders for this user'
+            })
+        }
+      return res.json(order)
+  })
 })
+
+exports.pushOrderInPurchaseList
