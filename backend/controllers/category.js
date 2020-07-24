@@ -15,3 +15,16 @@ exports.getCategoryById= (req, res, next, id)=>{
 
     next();
 }
+
+//Controllers: 
+exports.createCategory= (req, res)=>{
+    const catergory= new Catergory(req.body); 
+    catergory.save((err, catergory)=>{
+        if(err){
+            return res.status(400).json({
+                error: "failed to create category"
+            })
+        }
+        res.json({catergory}); 
+    })
+}
