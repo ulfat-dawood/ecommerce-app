@@ -28,3 +28,9 @@ exports.createCategory= (req, res)=>{
         res.json({catergory}); 
     })
 }
+
+//since there is :categoryId the all category info stored in req.catergory
+exports.getCategory= (req, res)=>{
+    res.json(req.catergory); 
+}
+
