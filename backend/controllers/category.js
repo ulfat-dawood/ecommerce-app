@@ -44,3 +44,21 @@ exports.getAllCategory= (req, res)=>{
         res.json(categories);
     })
 }
+
+exports.updateCategory= (req,res)=> {
+    const category= req.category; 
+    category.name= req.body.name; 
+
+    category.save(err,updatedCate=>{
+        if(err){
+            return res.status(400).json({
+                error: "failed to update categories"
+            })
+        
+        res.json(updatedCate); 
+        }
+       
+    });
+
+
+}
