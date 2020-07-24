@@ -7,6 +7,7 @@ const cors= require('cors');
 //Routes:
 const authRoute= require('./routes/auth');
 const userRoute= require('./routes/user');
+const categoryRoute= require('./routes/category');
 
 const app = express()
 const port = process.env.PORT || 8000; 
@@ -27,8 +28,9 @@ app.use(cookieParser());  //no need to require anywhere else
 app.use(cors());
 
 //My Routes      //these are midllewares, so: called via app.use()
-app.use('/api', authRoute) //signin, signout, signup
-app.use('/api', userRoute)
+app.use('/api', authRoute); //signin, signout, signup
+app.use('/api', userRoute);
+app.use('/api', categoryRoute);
 
 app.get('/hello', (req,res)=> res.send('Hello Express'));
 
