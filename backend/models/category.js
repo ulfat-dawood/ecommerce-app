@@ -2,9 +2,9 @@ const mongoose= require('mongoose');
 const Schema = mongoose.Schema; 
 
 const categorySchema= new Schema(
-    {
-        timestamps: true
-    },
+    // {
+    //     timestamps: true
+    // },
 
     {
         name:{
@@ -14,7 +14,8 @@ const categorySchema= new Schema(
             required: true,
             unique: true
         }
-    }
+    },
+    { timestamps: true }
 )
 
 module.exports= mongoose.model('Categoty', categorySchema)
