@@ -73,7 +73,7 @@ exports.removeCategory= (req, res)=>{
             })
         }
         res.json({
-            msg: 'Successfully Deleted'
+            msg: `Successfully Deleted ${category.name}`
         })
     })
 }
