@@ -23,7 +23,33 @@ exports.createProduct= (req, res)=>{
     form.keepExtensions= true; 
 
     form.parse(req, (err, fields, file)=>{
-        if(err)
+        if(err){
+            return res.status(400).json({
+                error: "invalid image upload"
+            })
+        }
+
+        let product= new Product(fields)
+
+        if(file.photo){
+            if(file.photo.size > 3000000){ // > 3 MB
+                return res.status(400).json({
+                    error: 'file size is too big'
+                })
+            }
+            product.photo.data= fs.readFileSync(file.photo.path);
+            product.photo.contentType= file.photo.type
+        }
+
+        //store in DB: 
+        product.save((err,product)=>{
+            if(err){
+                res.status(400).json({
+                    error: "unable to store shirt to DB"
+                })
+            }
+            
+        })
     })
 
 }
