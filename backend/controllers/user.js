@@ -1,6 +1,8 @@
 const User= require('../models/user'); 
 const Order= require('../models/order'); 
 
+//param middleware:
+
 //this middleware is fired every time there's :userId in the rout
 //this middleware will store all the user info in req.profile
 exports.getUserById = (req, res, next, id)=>{
