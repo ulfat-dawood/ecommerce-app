@@ -7,19 +7,23 @@ const {getUserById}= require('../controllers/user'); //to populate the user info
 
 //routes params
 router.param('userId', getUserById); 
-router.param('catergoryId', getCategoryById); 
+router.param('categoryId', getCategoryById); 
 
 //routes: 
-
-//the oder of middlewares is important 
-router.post('/category/create/:userId', isSignedIn, isAuthenticated, isAdmin, createCategory)//pass user id to validate user priveleges 
-
 router.get('/category/:caterogyId', getCategory)
 router.get('/categories', getAllCategory)
 
-router.post('/category/:caterogyId/:userId', isSignedIn, isAuthenticated, isAdmin, updateCategory)
+//only signedin authenticated admin can create/update/remove
+//the oder of middlewares is important
+router.post('/category/create/:userId', isSignedIn, isAuthenticated, isAdmin, createCategory)//pass user id to return req.catergory from the param middleware
+router.put("/category/:categoryId/:userId", isSignedIn, isAuthenticated, isAdmin,updateCategory);
 
-router.delete('/category/:caterogyId/:userId', isSignedIn, isAuthenticated, isAdmin, removeCategory)
-
-
-module.exports= router; 
+router.delete(
+    "/category/:categoryId/:userId",
+    isSignedIn,
+    isAuthenticated,
+    isAdmin,
+    removeCategory
+  );
+  
+module.exports= router;

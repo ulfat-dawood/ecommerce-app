@@ -1,31 +1,28 @@
-const Catergory= require('../models/category');
+const Category= require('../models/category');
 
-//define the Param controller: 
-exports.getCategoryById= (req, res, next, id)=>{
-
-    Catergory.findById(id).exec((err,Catergory)=>{
-        if(err){
-            return res.status(400).json({
-                err: 'category not found in db'
-            })
-        }
-        req.catergory= catergory; 
-        next();
-    })
-
-    next();
-}
+//define the Param middleware: 
+exports.getCategoryById = (req, res, next, id) => {
+    Category.findById(id).exec((err, cate) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Category not found in DB"
+        });
+      }
+      req.category = cate;
+      next();
+    });
+  };
 
 //Controllers: 
 exports.createCategory= (req, res)=>{
-    const catergory= new Catergory(req.body); 
-    catergory.save((err, catergory)=>{
+    const Category= new Category(req.body); 
+    Category.save((err, Category)=>{
         if(err){
             return res.status(400).json({
                 error: "failed to create category"
             })
         }
-        res.json({catergory}); 
+        res.json({Category}); 
     })
 }
 
@@ -45,35 +42,32 @@ exports.getAllCategory= (req, res)=>{
     })
 }
 
-exports.updateCategory= (req,res)=> {
-    const category= req.category; 
-    category.name= req.body.name; 
-
-    category.save(err,updatedCate=>{
-        if(err){
-            return res.status(400).json({
-                error: "failed to update categories"
-            })
-        
-        res.json(updatedCate); 
-        }
-       
+exports.updateCategory = (req, res) => {
+    const category = req.category;
+    category.name = req.body.name;
+  
+    category.save((err, updatedCategory) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Failed to update category"
+        });
+      }
+      res.json(updatedCategory);
     });
+  };
 
 
-}
-
-exports.removeCategory= (req, res)=>{
-    const category= req.category; 
-
-    category.remove((err, category)=>{
-        if(err){
-            return res.status(400).json({
-                error: 'unable to delete category'
-            })
-        }
-        res.json({
-            msg: `Successfully Deleted ${category.name}`
-        })
-    })
-}
+  exports.removeCategory = (req, res) => {
+    const category = req.category;
+  
+    category.remove((err, category) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Failed to delete this category"
+        });
+      }
+      res.json({
+        message: "Successfull deleted"
+      });
+    });
+  };
