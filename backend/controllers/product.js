@@ -45,10 +45,11 @@ exports.createProduct= (req, res)=>{
         product.save((err,product)=>{
             if(err){
                 res.status(400).json({
-                    error: "unable to store shirt to DB"
+                    error: "unable to store product to DB"
                 })
             }
-            
+            res.json(product); 
+
         })
     })
 
