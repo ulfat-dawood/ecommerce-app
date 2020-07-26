@@ -1,4 +1,7 @@
 const Product = require('../models/product'); 
+const formidable= require('formidable');
+const _ = require('lodash'); 
+const fs= require('fs'); //FILE SYSTEM no need to install, already built in node
 
 exports.getProductById= (req, res, next, id)=>{
     Product.findById(id)
@@ -12,4 +15,15 @@ exports.getProductById= (req, res, next, id)=>{
         req.product= product; 
         next(); 
     })
+}
+
+exports.createProduct= (req, res)=>{
+    //create a form: 
+    let form= new formidable.IncomingForm();
+    form.keepExtensions= true; 
+
+    form.parse(req, (err, fields, file)=>{
+        if(err)
+    })
+
 }
