@@ -8,7 +8,7 @@ const cors= require('cors');
 const authRoute= require('./routes/auth');
 const userRoute= require('./routes/user');
 const categoryRoute= require('./routes/category');
-
+const productRoute= require('./routes/product')
 const app = express()
 const port = process.env.PORT || 8000; 
 
@@ -31,6 +31,7 @@ app.use(cors());
 app.use('/api', authRoute); //signin, signout, signup
 app.use('/api', userRoute);
 app.use('/api', categoryRoute);
+app.use('/api', productRoute);
 
 app.get('/hello', (req,res)=> res.send('Hello Express'));
 
