@@ -4,7 +4,7 @@ const router= express.Router();
 const {getCategoryById,createCategory,getCategory,getAllCategory,updateCategory,removeCategory}= require('../controllers/category'); 
 const {isSignedIn,isAuthenticated,isAdmin}= require('../controllers/auth'); 
 const {getUserById}= require('../controllers/user'); //to populate the user info from req.profile
-
+//all routes tested ! 
 //routes params
 router.param('userId', getUserById); 
 router.param('categoryId', getCategoryById); 
@@ -25,5 +25,5 @@ router.delete(
     isAdmin,
     removeCategory
   );
-  
+
 module.exports= router;
