@@ -31,7 +31,7 @@ exports.createProduct= (req, res)=>{
 
         //destructuring fields of product schema:
         const {name, description, price, category, stock} = fields; 
-
+        console.log(fields);
         //if any of these fields do not exist: 
         if(!name || !description || !price || !category || !stock){
             return res.status(400).json({
