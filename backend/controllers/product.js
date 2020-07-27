@@ -29,6 +29,16 @@ exports.createProduct= (req, res)=>{
             })
         }
 
+        //destructuring fields of product schema:
+        const {name, description, price, category, stock} = fields; 
+
+        //if any of these fields do not exist: 
+        if(!name || !description || !price || !category || !stock){
+            return res.status(400).json({
+                error: "all fields are required"
+            })
+        }
+        //restriction on fields : 
         let product= new Product(fields)
 
         if(file.photo){
