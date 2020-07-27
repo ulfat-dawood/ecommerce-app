@@ -15,7 +15,7 @@ router.param('peroductId', getProductById)
 router.post('/product/create/:userId',isSignedIn,isAuthenticated, isAdmin, createProduct)
 
 router.get('/product/:productId', getProduct)
-
+router.get('product/photo/:productId', getPhoto)
 
 
 module.exports= router; 
