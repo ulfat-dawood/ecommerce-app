@@ -140,3 +140,7 @@ exports.updateProduct= (req, res)=>{
         })
     })
 }
+
+exports.getAllProducts= (req, res)=>{
+    
+}
