@@ -79,3 +79,7 @@ exports.getPhoto= (req, res, next)=>{
     }
     next(); 
 }
+
+exports.deleteProduct= (req, res)=>{
+
+}
