@@ -142,9 +142,13 @@ exports.updateProduct= (req, res)=>{
 }
 
 exports.getAllProducts= (req, res)=>{
+    let limit= req.query.limit ? parseInt(req.query.limit)  : 8; //values are string so must convert them to int
+    let sortBy= req.query.sortBy || '_id' ;
     Product.find()
     .select('-photp')
-    .limit(8)
+    .populate('category')
+    .sort([[sortBy, 'asc']])
+    .limit(limit)
     .exec((err,products)=>{
         if(err){
             return res.status.json({
