@@ -63,3 +63,19 @@ exports.createProduct= (req, res)=>{
     })
 
 }
+
+exports.getProduct=(req, res)=>{
+    //send evrything to the frontend except bulk data like photo
+    //which is gonna be sent in the background via another middleware
+    req.product.photo= undefined; 
+    return res.json(req.product)
+}
+
+//middleware for fetching the photo in the background: 
+exports.getPhoto= (req, res, next)=>{
+    if(req.product.photo.data){
+        res.set('Content-Type', req.product.contentType); 
+        return res.send(req.product.photo.data); 
+    }
+    next(); 
+}
