@@ -17,6 +17,7 @@ router.post('/product/create/:userId',isSignedIn,isAuthenticated, isAdmin, creat
 router.get('/product/:productId', getProduct)
 router.get('product/photo/:productId', getPhoto)
 
+//only signedIn, Authenticated admins can delete update products
 router.delete('/product/:productId/:userId', isSignedIn, isAuthenticated, isAdmin, deleteProduct)
 
 router.put('/product/:productId/:userId', isSignedIn, isAuthenticated, isAdmin, updateProduct)

@@ -6,12 +6,14 @@ const fs= require('fs'); //FILE SYSTEM no need to install, already built in node
 exports.getProductById= (req, res, next, id)=>{
     Product.findById(id)
     .populate('category')
-    .exec((err, product)=>{
+    .exec((err, product)=>{ //product is a mongoose object
         if(err){
             return res.status(400).json({
                 error: 'Product not found'
             })
         }
+        //product is a mongoose object
+        //later can be used wiht mongoose functions like product.remove()
         req.product= product; 
         next(); 
     })
@@ -81,9 +83,22 @@ exports.getPhoto= (req, res, next)=>{
 }
 
 exports.deleteProduct= (req, res)=>{
-
+    //get the product object which is returned by the :productId param middleware 
+    let product= req.product; 
+    //since product is also an object from mongoose we can use remove()
+    product.remove((err,deletedProduct)=>{
+        if(err){
+            return res.status(400).json({
+                error: 'failed to delete product'
+            })
+        }
+        res.json({
+            msg: 'product deleted successfully',
+            deletedProduct
+        })
+    }); 
 }
 
 exports.updateProduct= (req, res)=>{
-    
+
 }
