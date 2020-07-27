@@ -142,5 +142,15 @@ exports.updateProduct= (req, res)=>{
 }
 
 exports.getAllProducts= (req, res)=>{
-    
+    Product.find()
+    .select('-photp')
+    .limit(8)
+    .exec((err,products)=>{
+        if(err){
+            return res.status.json({
+                error: 'Error fetching products'
+            })
+        }
+        res.json(products); 
+    })
 }
