@@ -25,5 +25,6 @@ exports.createOrder= (req, res)=>{
                 error: 'unable to initiate order'
             })
         }
+        res.json(order);
     })
 }
