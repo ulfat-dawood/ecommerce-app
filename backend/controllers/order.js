@@ -50,10 +50,13 @@ exports.updateStatus=(req,res)=>{
     Order.update(
         {_id: req.body.orderId}, 
         {$set: {status: req.body.status}},
-        (err,order)=>{
+        (err,UpdatedOrder)=>{
             if(err){
-                
+                return res.status(400).json({
+                    error: 'unable to updated status'
+                })
             }
+            res.json(UpdatedOrder); 
         }
 
     )
