@@ -28,3 +28,7 @@ exports.createOrder= (req, res)=>{
         res.json(order);
     })
 }
+
+exports.getAllOrders= (req,res)=>{
+    
+}
