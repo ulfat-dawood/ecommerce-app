@@ -41,3 +41,11 @@ exports.getAllOrders= (req,res)=>{
             res.json(orders)
         })
 }
+
+exports.getOrderStatus = (req, res)=>{
+    
+}
+
+exports.updateStatus=(req,res)=>{
+
+}
