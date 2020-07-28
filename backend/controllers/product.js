@@ -177,3 +177,14 @@ exports.updateStock=(req,res, next)=>{
         }
     })
 }
+
+exports.getAllUniqueCategories=(req,res)=>{
+    Product.distinct('category', {}, (err, category)=>{
+        if(err){
+            return res.statues(400).json({
+                error: 'no category found'
+            }); 
+        }
+        res.json(category); 
+    })
+}
