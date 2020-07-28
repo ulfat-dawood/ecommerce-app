@@ -145,7 +145,7 @@ exports.getAllProducts= (req, res)=>{
     let limit= req.query.limit ? parseInt(req.query.limit)  : 8; //values are string so must convert them to int
     let sortBy= req.query.sortBy || '_id' ;
     Product.find()
-    .select('-photp')
+    .select('-photo')
     .populate('category')
     .sort([[sortBy, 'asc']])
     .limit(limit)
@@ -156,5 +156,24 @@ exports.getAllProducts= (req, res)=>{
             })
         }
         res.json(products); 
+    })
+}
+
+exports.updateStock=(req,res, next)=>{
+    let myOperations= req.body.order.product.map(product=>{
+        return{
+            updateOne: {
+                filter: {_id: product._id},
+                update: {$inc: {stock: -product.count , sold: +product.count}}
+            }
+        }
+    }); 
+
+    Product.bulkWrite(myOperations, {}, (err, updatedProduct)=>{
+        if(err){
+            return res.status(400).json({
+                error: 'error occured in bulk updating'
+            })
+        }
     })
 }
