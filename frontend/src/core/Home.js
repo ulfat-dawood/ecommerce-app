@@ -1,9 +1,10 @@
 
-import React from 'react'
+import React from 'react';
+import '../styles.css';
 
 export default function App(){ 
 
 	return(
-	<h1>HOME</h1>
+	<h1 className='text-white'>HOME</h1>
 	) 
 }
