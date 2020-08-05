@@ -1,11 +1,11 @@
 
 import React from 'react';
 import '../styles.css';
+import {backendUrl} from '../backend' 
 
 export default function App(){ 
-    console.log('env test:', process.env.REACT_APP_BACKEND_URL)
-
+    
 	return(
-	<h1 className='text-white'>HOME</h1>
+    <h1 className='text-white'>HOME is: {backendUrl}</h1>
 	) 
 }
