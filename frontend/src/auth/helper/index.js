@@ -19,6 +19,8 @@ export const signup= (user)=> {
 }
 
 export const signin= (user)=> {
+
+    //TODO: autenticate the user 
     return fetch(`${API}/signin` , {
         method: 'POST', 
         header:{
@@ -56,5 +58,16 @@ export const signout= (next)=> {
         })
         .then(response=> console.log('signed out successfully'))
         .catch(err=> console.log(err))
+    }
+}
+
+export const isAuthenticated= ()=>{
+    if(typeof window == 'undefined'){ //if user has access to the window object
+        return false;  
+    }
+    if(localStorage.getItem('jwt')){ //if we are able to access localStorage 
+        return JSON.parse(localStorage.getItem('jwt'))
+    }else{
+        return false; 
     }
 }
