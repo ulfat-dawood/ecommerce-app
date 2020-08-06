@@ -37,9 +37,24 @@ export const signin= (user)=> {
 
 //authenticate() is a middleware> use next
 export const authenticate= (data, next)=>{
-    if(typeof window != 'undefined'){ //if window object is accessible to us
+    if(typeof window != 'undefined'){ //if user has access to the window object
         localStorage.setItem('jwt', JSON.stringify(data));
         next(); 
     }
 }
 
+//signout is a middleware so we user next
+//signout means just remove the the JWT token
+export const signout= (next)=> {
+    if(typeof window != 'undefined'){ //if user has access to the window object
+        localStorage.removeItem('jwt');
+        next(); 
+        
+        //Logout the user from the backend as well:
+        return fetch(`${API}/signout`, {
+            method: 'GET'
+        })
+        .then(response=> console.log('signed out successfully'))
+        .catch(err=> console.log(err))
+    }
+}
