@@ -12,8 +12,8 @@ const currentTab= (history, path)=>{
     }
 }
 
-const Menu= (propes)=>{
-    const {history} = propes; 
+const Menu= (props)=>{
+    const {history} = props; 
     return(
         <>
           <ul className="nav nav-tabs bg-dark">
