@@ -7,7 +7,7 @@ import Base from './Base';
 export default function App(){ 
     
 	return(
-     <Base title='home page'>
+     <Base title='home page' description='welcome to the tshirt store'>
          <div className="row">
              <div className="col-4">
                  <button className="btn btn-success">Test</button>
