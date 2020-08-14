@@ -5,6 +5,20 @@ import Base from '../core/Base';
 
 const Signup=()=>{
 
+    const [values, setValues]= useState({
+        name:'',
+        email:'',
+        password:'',
+        error:'',
+        success: flase
+    }); 
+    //destructuring the state:
+     const {name, email, password, error, success}= values; 
+
+    const handleChange= name=> event=>{
+        
+    }
+
     const signupForm= ()=>{
         return (
             <div className="row">
