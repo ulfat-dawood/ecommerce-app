@@ -16,7 +16,7 @@ const Signup=()=>{
      const {name, email, password, error, success}= values; 
 
     const handleChange= name=> event=>{
-        
+        setValues({...values, error:false, [name]:event.target.value})
     }
 
     const signupForm= ()=>{
@@ -26,13 +26,13 @@ const Signup=()=>{
                     <form >
                         <div className="form-group">
                             <label  className="text-light">Name:</label>
-                            <input className="form-control" type="text"/>
+                            <input className="form-control" type="text" onChange={handleChange('name')}/>
 
                             <label  className="text-light">Email:</label>
-                            <input className="form-control" type="email"/>
+                            <input className="form-control" type="email" onChange={handleChange('email')}/>
 
                             <label  className="text-light">Password</label>
-                            <input className="form-control" type="password"/>
+                            <input className="form-control" type="password" onChange={handleChange('password')}/>
                         </div>
                         <button className="btn btn-success btn-block">Submit</button>
                     </form>
