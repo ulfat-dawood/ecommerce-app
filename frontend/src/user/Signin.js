@@ -15,7 +15,43 @@ const Signin=()=>{
         didRedirect:false
     })
 
-    const {email, password, error, loading, didRedirect}= values
+    const {email, password, error, loading, didRedirect}= values;
+    const {user}= isAuthenticated(); 
+
+    const handleChange= name=> event=>{
+        setValues({...values, error:false, [name]:event.target.value})
+    }
+
+    const onsubmit=(event)=>{
+        event.preventDefault();
+
+    }
+
+    const errorMsg= ()=>{
+      
+        return ( 
+         <div className="row">
+         <div className="col-md-6 offset-sm-3 text-left">
+        <div className="alert alert-danger"
+         style={{display: error ? '' : 'none'}}
+         >{error}</div>
+         </div>
+          </div>
+         )
+     }
+ 
+     const successMsg= ()=>{
+         return ( 
+         <div className="row">
+         <div className="col-md-6 offset-sm-3 text-left">
+         <div className="alert alert-success"
+          style={{display: success ? '' : 'none'}}
+          >account created! Please login <Link to='/signin'>here</Link></div>
+         </div>
+          </div>
+                
+          )
+      }
 
     const signinForm= ()=>{
         return (
@@ -24,12 +60,12 @@ const Signin=()=>{
                     <form >
                         <div className="form-group">
                             <label  className="text-light">Email:</label>
-                            <input className="form-control" type="email"/>
+                            <input className="form-control" value={email} onChange={handleChange('email')} type="email"/>
 
                             <label  className="text-light">Password:</label>
-                            <input className="form-control" type="password"/>
+                            <input className="form-control" value={password} onChange={handleChange('password')} type="password"/>
                         </div>
-                        <button className="btn btn-success btn-block">Submit</button>
+                        <button onClick={onSubmit}className="btn btn-success btn-block">Submit</button>
                     </form>
                 </div>
             </div>
