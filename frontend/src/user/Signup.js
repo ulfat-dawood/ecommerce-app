@@ -37,6 +37,18 @@ const Signup=()=>{
         .catch(console.log('error in signup')) 
     }
 
+    const errorMsg= ()=>{
+       return ( <div className="alert alert-success"
+        style={{display: success ? '' : 'none'}}
+        >account created! Please login <Link to='/signin'>here</Link></div>)
+    }
+
+    const successMsg= ()=>{
+        return ( <div className="alert alert-success"
+         style={{display: success ? '' : 'none'}}
+         >account created! Please login <Link to='/signin'>here</Link></div>)
+     }
+
     const signupForm= ()=>{
         return (
             <div className="row">
