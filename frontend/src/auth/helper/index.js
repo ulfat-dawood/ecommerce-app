@@ -2,13 +2,15 @@ import {API} from '../../backend'; //the backend url
 
 
 export const signup= (user)=> {
+   
     return fetch(`${API}/signup` , {
         method: 'POST', 
         header:{
             Accept: 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(user)
+        body:JSON.stringify(user)
+        
     })
     .then(response=>{ //if success
         return response.json() // convert the response into json

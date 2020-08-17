@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import Base from '../core/Base'; 
+import { signup } from '../auth/helper';
 
 const Signup=()=>{
 
@@ -10,13 +11,29 @@ const Signup=()=>{
         email:'',
         password:'',
         error:'',
-        success: flase
+        success: false
     }); 
+
     //destructuring the state:
      const {name, email, password, error, success}= values; 
 
     const handleChange= name=> event=>{
         setValues({...values, error:false, [name]:event.target.value})
+    }
+
+    const onSubmit= event=>{
+        event.preventDefault(); 
+        setValues({...values, error:false});
+        signup({name, email, password})
+        .then(data=>{
+            if(data.error){
+                setValues({...values, error:data.error, success: false})
+            }else{//if no error, the backend will be hit> reset the state values
+                setValues({...values, name:'', emai:'', password:'',error:'',success:true})
+
+            }
+        })
+        .catch(console.log('error in signup')) 
     }
 
     const signupForm= ()=>{
@@ -26,15 +43,15 @@ const Signup=()=>{
                     <form >
                         <div className="form-group">
                             <label  className="text-light">Name:</label>
-                            <input className="form-control" type="text" onChange={handleChange('name')}/>
+                            <input className="form-control" value={name} type="text" onChange={handleChange('name')}/>
 
                             <label  className="text-light">Email:</label>
-                            <input className="form-control" type="email" onChange={handleChange('email')}/>
+                            <input className="form-control" value={email} type="email" onChange={handleChange('email')}/>
 
                             <label  className="text-light">Password</label>
-                            <input className="form-control" type="password" onChange={handleChange('password')}/>
-                        </div>
-                        <button className="btn btn-success btn-block">Submit</button>
+                            <input className="form-control" value={password} type="password" onChange={handleChange('password')}/>
+                        </div> 
+                        <button onClick={onSubmit} className="btn btn-success btn-block">Submit</button>
                     </form>
                 </div>
             </div>
