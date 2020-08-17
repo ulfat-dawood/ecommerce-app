@@ -38,9 +38,9 @@ const Signup=()=>{
     }
 
     const errorMsg= ()=>{
-       return ( <div className="alert alert-success"
-        style={{display: success ? '' : 'none'}}
-        >account created! Please login <Link to='/signin'>here</Link></div>)
+       return ( <div className="alert alert-danger"
+        style={{display: error ? '' : 'none'}}
+        >{error}</div>)
     }
 
     const successMsg= ()=>{
