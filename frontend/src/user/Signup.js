@@ -26,10 +26,11 @@ const Signup=()=>{
         setValues({...values, error:false});
         signup({name, email, password})
         .then(data=>{
+            console.log('data',data)
             if(data.error){
                 setValues({...values, error:data.error, success: false})
             }else{//if no error, the backend will be hit> reset the state values
-                setValues({...values, name:'', emai:'', password:'',error:'',success:true})
+                setValues({...values, name:'', email:'', password:'',error:'',success:true})
 
             }
         })
