@@ -1,9 +1,21 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
+//isAuthenticated: returns JWT token from the localStorage
+import {signin, authenticate, isAuthenticated} from '../auth/helper';
 import Base from '../core/Base'; 
 
 const Signin=()=>{
+
+    const [values, setValues]= useState({
+        email:'',
+        password:'',
+        error:'',
+        loading:false,
+        didRedirect:false
+    })
+
+    const {email, password, error, loading, didRedirect}= values
 
     const signinForm= ()=>{
         return (
