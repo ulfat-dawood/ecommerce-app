@@ -38,15 +38,29 @@ const Signup=()=>{
     }
 
     const errorMsg= ()=>{
-       return ( <div className="alert alert-danger"
+      
+       return ( 
+        <div className="row">
+        <div className="col-md-6 offset-sm-3 text-left">
+       <div className="alert alert-danger"
         style={{display: error ? '' : 'none'}}
-        >{error}</div>)
+        >{error}</div>
+        </div>
+         </div>
+        )
     }
 
     const successMsg= ()=>{
-        return ( <div className="alert alert-success"
+        return ( 
+        <div className="row">
+        <div className="col-md-6 offset-sm-3 text-left">
+        <div className="alert alert-success"
          style={{display: success ? '' : 'none'}}
-         >account created! Please login <Link to='/signin'>here</Link></div>)
+         >account created! Please login <Link to='/signin'>here</Link></div>
+        </div>
+         </div>
+               
+         )
      }
 
     const signupForm= ()=>{
