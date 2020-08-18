@@ -20,16 +20,17 @@ export const signup= (user)=> {
 }
 
 export const signin= (user)=> {
+    console.log(user); 
 
     //TODO: autenticate the user 
-    return fetch(`${API}/signin` , {
-        method: 'POST', 
-        header:{
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
+    return fetch(`${API}/signin`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
         },
-        body: {'email':'maha@maha.com','password':12345} //JSON.stringify(user)
-    })
+        body: JSON.stringify(user)
+      })
     .then(response=>{ //if success
         return response.json() // convert the response into json
     })

@@ -41,6 +41,7 @@ exports.signup = (req, res)=>{
 }
 
 exports.signin = (req, res)=>{
+    
     const {email, password}= req.body; 
     const errors= validationResult(req);
     if(!errors.isEmpty()){
@@ -50,7 +51,7 @@ exports.signin = (req, res)=>{
         })
     }
 
-    User.findOne({email:email}, (err, user)=>{
+    User.findOne({email:email}, (err, user)=>{ 
         //if email not found:
         if(err || !user){
             return res.status(400).json({
