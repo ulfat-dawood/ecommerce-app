@@ -23,7 +23,7 @@ const Signin=()=>{
         setValues({...values, error:false, [name]:event.target.value})
     }
 
-    const onsubmit=(event)=>{
+    const onSubmit=(event)=>{
         event.preventDefault();
         setValues({...values, error:false, loading:true});
         signin({email, password}) // signin() returns> fetch() which returns a promise.
@@ -43,6 +43,24 @@ const Signin=()=>{
         .catch(console.log('signin failed'));
     }
 
+    const performRedirect= ()=>{
+        if(didRedirect){
+            //if user is authenticated @ isAdmin: 
+            if(user && user.role===1){
+                return(
+                    <p>redirect to admin</p>
+                )
+            }else{
+                return(
+                    <p>redirect to user dashboard</p>
+                )
+            }
+        }
+        if(isAuthenticated()){
+            return <Redirect to='/' /> ;
+        }
+    }
+
     const errorMsg= ()=>{
       
         return ( 
@@ -56,17 +74,17 @@ const Signin=()=>{
          )
      }
  
-     const successMsg= ()=>{
-         return ( 
-         <div className="row">
-         <div className="col-md-6 offset-sm-3 text-left">
-         <div className="alert alert-success"
-          style={{display: success ? '' : 'none'}}
-          >account created! Please login <Link to='/signin'>here</Link></div>
-         </div>
-          </div>
-                
-          )
+     const loadingsMsg= ()=>{
+        return ( 
+            //if loading is true then return the following
+            loading && (
+                <div className="alert alert-info">
+                    <h2>Loading...</h2>
+                </div>
+            )
+                  
+        )
+
       }
 
     const signinForm= ()=>{
@@ -81,7 +99,7 @@ const Signin=()=>{
                             <label  className="text-light">Password:</label>
                             <input className="form-control" value={password} onChange={handleChange('password')} type="password"/>
                         </div>
-                        <button onClick={onSubmit}className="btn btn-success btn-block">Submit</button>
+                        <button onClick={onSubmit} className="btn btn-success btn-block">Submit</button>
                     </form>
                 </div>
             </div>
@@ -90,7 +108,13 @@ const Signin=()=>{
 
     return(
         <Base title='Signin Page' description='A page for user to signin'>
+            {loadingsMsg()}
+            {errorMsg()}
             {signinForm()}
+            {performRedirect()}
+            <p className="text-white text-center">
+                {JSON.stringify(values)}
+            </p>
         </Base>
     )
 }

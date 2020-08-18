@@ -28,7 +28,7 @@ export const signin= (user)=> {
             Accept: 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(user)
+        body: {'email':'maha@maha.com','password':12345} //JSON.stringify(user)
     })
     .then(response=>{ //if success
         return response.json() // convert the response into json
