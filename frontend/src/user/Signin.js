@@ -4,6 +4,7 @@ import {Link, Redirect} from 'react-router-dom';
 //isAuthenticated: returns JWT token from the localStorage
 import {signin, authenticate, isAuthenticated} from '../auth/helper';
 import Base from '../core/Base'; 
+import {} from '../auth/helper'; 
 
 const Signin=()=>{
 
@@ -16,7 +17,7 @@ const Signin=()=>{
     })
 
     const {email, password, error, loading, didRedirect}= values;
-    const {user}= isAuthenticated(); 
+    const {user}= isAuthenticated(); //returns the jwt value if it exists or false
 
     const handleChange= name=> event=>{
         setValues({...values, error:false, [name]:event.target.value})
@@ -24,7 +25,22 @@ const Signin=()=>{
 
     const onsubmit=(event)=>{
         event.preventDefault();
-
+        setValues({...values, error:false, loading:true});
+        signin({email, password}) // signin() returns> fetch() which returns a promise.
+        .then(data=>{
+            if(data.error){
+                setValues({...values, error:data.error, loading:true});
+            }else{
+                //authenticate accepts data and next as param
+                //data=> token     next=>callback function
+                authenticate(data, ()=>{
+                    setValues({...values, 
+                    didRedirect: true, 
+                  })
+                })
+            }
+        })
+        .catch(console.log('signin failed'));
     }
 
     const errorMsg= ()=>{
