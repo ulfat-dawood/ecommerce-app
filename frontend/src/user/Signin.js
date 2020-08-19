@@ -9,8 +9,8 @@ import {} from '../auth/helper'; //no need for '../auth/helper/index' becase ind
 const Signin=()=>{
 
     const [values, setValues]= useState({
-        email:'',
-        password:'',
+        email:'maha@maha.com',
+        password:'12345',
         error:'',
         loading:false,
         didRedirect:false
