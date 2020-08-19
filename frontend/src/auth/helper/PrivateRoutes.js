@@ -3,18 +3,18 @@ import {Route, Reditect} from 'react-router-dom';
 
 import {isAuthenticated} from './index';
 
-function PrivateRoute({ children, ...rest }) {
+const PrivateRoute= ({ component: Component, ...rest }) => {
     return (
       <Route
         {...rest}
-        render={({ location }) =>
-          fakeAuth.isAuthenticated ? (
-            children
+        render={ props =>
+          isAuthenticated() ? (
+            <Component {...props}/>
           ) : (
             <Redirect
               to={{
-                pathname: "/login",
-                state: { from: location }
+                pathname: "/signin",
+                state: { from: props.location }
               }}
             />
           )
