@@ -52,11 +52,11 @@ const Signin=()=>{
                 )
             }else{
                 return(
-                    <p>redirect to user dashboard</p>
+                   <p>redirect to user dashboard</p>
                 )
             }
         }
-        if(isAuthenticated()){
+        if(isAuthenticated()){ 
             return <Redirect to='/' /> ;
         }
     }
