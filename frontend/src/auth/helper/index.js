@@ -49,7 +49,7 @@ export const authenticate= (data, next)=>{
 
 //signout is a middleware so we user next
 //signout means just remove the the JWT token
-export const signout= (next)=> {
+export const signout= (next)=> { //next means accepst FCB 
     if(typeof window != 'undefined'){ //if user has access to the window object
         localStorage.removeItem('jwt');
         next(); 

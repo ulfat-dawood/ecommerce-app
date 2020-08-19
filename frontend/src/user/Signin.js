@@ -4,7 +4,7 @@ import {Link, Redirect} from 'react-router-dom';
 //isAuthenticated: returns JWT token from the localStorage
 import {signin, authenticate, isAuthenticated} from '../auth/helper';
 import Base from '../core/Base'; 
-import {} from '../auth/helper'; 
+import {} from '../auth/helper'; //no need for '../auth/helper/index' becase index is the default
 
 const Signin=()=>{
 
