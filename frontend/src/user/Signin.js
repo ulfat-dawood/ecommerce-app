@@ -24,6 +24,8 @@ const Signin=()=>{
     }
 
     const onSubmit=(event)=>{
+        //signin the user> if valid user: 1-authenticate the user 2-redirect
+        //                 if not: consol.log 
         event.preventDefault();
         setValues({...values, error:false, loading:true});
         signin({email, password}) // signin() returns> fetch() which returns a promise.
@@ -34,9 +36,7 @@ const Signin=()=>{
                 //authenticate accepts data and next as param
                 //data=> token     next=>callback function
                 authenticate(data, ()=>{
-                    setValues({...values, 
-                    didRedirect: true, 
-                  })
+                    setValues({...values, didRedirect: true})
                 })
             }
         })
