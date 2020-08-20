@@ -45,14 +45,15 @@ const Signin=()=>{
 
     const performRedirect= ()=>{
         if(didRedirect){
-            //if user is authenticated @ isAdmin: 
+            //if user is authenticated & isAdmin: 
             if(user && user.role===1){
                 return(
-                    <p>redirect to admin</p>
+                    <Redirect to='admin/dashboard'/>
                 )
             }else{
                 return(
-                   <p>redirect to user dashboard</p>
+                    <Redirect to='user/dashboard'/>
+
                 )
             }
         }
