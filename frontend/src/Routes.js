@@ -8,6 +8,7 @@ import Signin from './user/Signin';
 import AdminRoutes from './auth/helper/AdminRoutes';
 import PrivateRoutes from './auth/helper/PrivateRoutes';
 import UserDashboard from './user/UserDashBoard';
+import AdminDashboard from './user/AdminDashBoard';
 
 
 export default function Routes(){ 
@@ -18,7 +19,7 @@ export default function Routes(){
             <Route exact path='/signup' component={Signup}/>
             <Route exact path='/signin' component={Signin}/>
             <PrivateRoutes exact path='/user/dashboard' component={UserDashboard}/>
-            <PrivateRoutes exact path='/user/dashboard' component={AdminRoutes}/>
+            <AdminRoutes exact path='/admin/dashboard' component={AdminDashboard}/> 
 
 
 

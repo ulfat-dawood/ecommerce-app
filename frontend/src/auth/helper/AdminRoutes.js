@@ -1,9 +1,9 @@
-import React from 'react'; 
-import {Route, Reditect} from 'react-router-dom'; 
+import React  from 'react'; 
+import {Route,Redirect} from 'react-router-dom'; 
 
 import {isAuthenticated} from './index';
 
-const AdminRoute= ({ component: Component, ...rest }) => {
+const AdminRoutes= ({ component: Component, ...rest }) => {
     return (
       <Route
         {...rest}
@@ -23,4 +23,4 @@ const AdminRoute= ({ component: Component, ...rest }) => {
     );
   }
 
-  export default AdminRoute; 
+  export default AdminRoutes; 

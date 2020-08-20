@@ -26,10 +26,10 @@ const Menu= (props)=>{
                   <Link style={currentTab(history, '/cart')} className='nav-link' to='/cart'>CART</Link>
               </li>
               <li className="nav-item">
-                  <Link style={currentTab(history, '/user/dashboard')} className='nav-link' to='/user/dashboard'>DASHBOARD</Link>
+                  <Link style={currentTab(history, '/user/dashboard')} className='nav-link' to='/user/dashboard'>U. DASHBOARD</Link>
               </li>
               <li className="nav-item">
-                  <Link style={currentTab(history, '/admin/dashboard')} className='nav-link' to='//admin/dashboard'>A. DASHBOARD</Link>
+                  <Link style={currentTab(history, '/admin/dashboard')} className='nav-link' to='/admin/dashboard'>A. DASHBOARD</Link>
               </li>
               {!isAuthenticated() && (<>
                   <li className="nav-item">
