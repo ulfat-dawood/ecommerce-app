@@ -37,11 +37,15 @@ const AdminDashboard= ()=>{
     }
 
     const AdminRightSide=()=>{
-        
+        return(
+            <div>
+                <h1>Hi Admin</h1>
+            </div>
+        )
     }
     return(
         <Base title='Welcome to admin area' description='manage all of you products here' className='container bg-success p-4'>
-            <div className="raw">
+            <div className="row">
                 <div className="col-3">
                 {AdminLeftSide()}
                 </div>
