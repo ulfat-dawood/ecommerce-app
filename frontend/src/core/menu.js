@@ -25,12 +25,14 @@ const Menu= (props)=>{
               <li className="nav-item">
                   <Link style={currentTab(history, '/cart')} className='nav-link' to='/cart'>CART</Link>
               </li>
-              <li className="nav-item">
+              {isAuthenticated() && isAuthenticated().user.role=== 0 && (<li className="nav-item">
                   <Link style={currentTab(history, '/user/dashboard')} className='nav-link' to='/user/dashboard'>U. DASHBOARD</Link>
-              </li>
-              <li className="nav-item">
+              </li>)}
+              {isAuthenticated() && isAuthenticated().user.role=== 1 &&(
+                  <li className="nav-item">
                   <Link style={currentTab(history, '/admin/dashboard')} className='nav-link' to='/admin/dashboard'>A. DASHBOARD</Link>
               </li>
+              )}
               {!isAuthenticated() && (<>
                   <li className="nav-item">
                   <Link style={currentTab(history, '/signin')} className='nav-link' to='/signin'>SIGN IN</Link>
