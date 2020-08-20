@@ -11,16 +11,28 @@ const AdminDashboard= ()=>{
     const {user: {name, email, role}} = myObj; 
 
     const AdminLeftSide=()=>{
-
+        return (
+            <div className="card">
+                <h4 className="card-header bg-dark text-white"> Admin nav bar</h4>
+            </div>
+        )
     }
 
     const AdminRightSide=()=>{
         
     }
     return(
-        <Base title='Welcome to admin area' description='manage all of you products here'>
-        {AdminLeftSide()}
-        {AdminRightSide()}
+        <Base title='Welcome to admin area' description='manage all of you products here' className='container bg-info p-4'>
+            <div className="raw">
+                <div className="col-3">
+                {AdminLeftSide()}
+                </div>
+                <div className="col-9">
+                {AdminRightSide()}
+                </div>
+            </div>
+        
+        
         </Base>
 
     )
