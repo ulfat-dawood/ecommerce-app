@@ -17,22 +17,22 @@ const AddCategory= ()=>{
         setName(e.target.value)
     }
 
-    const onSubmit=(event)=>{
-        event.preventDefault(); 
-        setError('');
-        setSuccess(false)
-
-        //backend call:
-        //payload is object so pass: {name:name}
-        createCategory(user._id, token, {name}).then(data=>{
-            //console.log('data', data); 
-            // if(data.error)
-            //    setError(true);
-            // else
-            //    setError(''); 
-            //    setSuccess(true)
-        })
-    }
+    const onSubmit = event => {
+        event.preventDefault();
+        setError("");
+        setSuccess(false);
+    
+        //backend request fired
+        createCategory(user._id, token, { name }).then(data => {
+          if (data.error) {
+            setError(true);
+          } else {
+            setError("");
+            setSuccess(true);
+            setName("");
+          }
+        });
+      };
 
     const MyCategoryForm=()=>{
         return(

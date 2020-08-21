@@ -1,6 +1,9 @@
 import { API } from "../../backend";
 
 export const createCategory = (userId, token, category) => {
+    //http://localhost:8000/api/category/create/5ed3770ebd98763b1c2f8327
+    const url =`${API}/category/create/${userId}`
+    
     return fetch(`${API}/category/create/${userId}`, {
       method: "POST",
       headers: {
