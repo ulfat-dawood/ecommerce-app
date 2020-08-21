@@ -24,7 +24,7 @@ const AddCategory= ()=>{
     }
     const goBack= ()=>(
         <div className="mt-5">
-            <Link className='btn btn-sm btn-info mb-3' to='/admin/dashboard'>Admin Home</Link>
+            <Link className='btn btn-sm btn-dark mb-3' to='/admin/dashboard'>Admin Home</Link>
         </div>
     )
     return(
@@ -32,7 +32,8 @@ const AddCategory= ()=>{
         className='container bg-info p-4'>
             <div className="bg-white rounded">
                 <div className="col-md-8 offset-md-2">
-                    {MyCategoryForm()}
+                    {MyCategoryForm()} 
+                    {goBack()}
                 </div>
             </div>
         </Base>
