@@ -38,8 +38,13 @@ const AdminDashboard= ()=>{
 
     const AdminRightSide=()=>{
         return(
-            <div>
-                <h1>Hi Admin</h1>
+            <div className="card mb-4">
+                <h4 className="card-header">Admin info</h4>
+                <ul className="list-goup">
+                    <li className="list-group-item">
+                        <span className="badge badge-success mr-2">Name:</span> Ulfat
+                    </li>
+                </ul>
             </div>
         )
     }
