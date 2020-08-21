@@ -34,6 +34,17 @@ const AddCategory= ()=>{
         });
       };
 
+    const successMsg= ()=>{
+        if(success){
+            return <h4 className="text-success">Category Created</h4>
+        }
+    }
+
+    const warningMsg= ()=>{
+        return <h4 className="text-warning">failed to create category</h4>
+        
+    }
+
     const MyCategoryForm=()=>{
         return(
             <form>
@@ -58,6 +69,8 @@ const AddCategory= ()=>{
         className='container bg-info p-4'>
             <div className="bg-white rounded">
                 <div className="col-md-8 offset-md-2">
+                    {successMsg()}
+                    {warningMsg()}
                     {MyCategoryForm()} 
                     {goBack()}
                 </div>
