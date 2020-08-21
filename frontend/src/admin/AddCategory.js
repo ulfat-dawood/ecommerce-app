@@ -22,6 +22,11 @@ const AddCategory= ()=>{
             </form>
         )
     }
+    const goBack= ()=>(
+        <div className="mt-5">
+            <Link className='btn btn-sm btn-info mb-3' to='/admin/dashboard'>Admin Home</Link>
+        </div>
+    )
     return(
         <Base title='create a category here' description='add a new category for new tshirts'
         className='container bg-info p-4'>
