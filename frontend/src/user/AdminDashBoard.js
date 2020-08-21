@@ -5,11 +5,8 @@ import Base from '../core/Base';
 import {isAuthenticated} from '../auth/helper'; 
 
 const AdminDashboard= ()=>{
-    const myObj= {
-        admin: {name:'john',age:40},
-        user:{name:'jack',age:20}
-    }
-    const {user: {name, email, role}} = myObj; 
+    
+    const {user: {name, email, role}} = isAuthenticated(); 
 
     const AdminLeftSide=()=>{
         return (
@@ -40,9 +37,17 @@ const AdminDashboard= ()=>{
         return(
             <div className="card mb-4">
                 <h4 className="card-header">Admin info</h4>
-                <ul className="list-goup">
+                <ul className="list-goup m-0 p-0">
                     <li className="list-group-item">
-                        <span className="badge badge-success mr-2">Name:</span> Ulfat
+                        <p><span className="badge badge-success mr-2">Name:</span> {name}</p>
+                    </li>
+
+                    <li className="list-group-item">
+                        <p><span className="badge badge-success mr-2">Email:</span> {email}</p>
+                    </li>
+
+                    <li className="list-group-item">
+                        <span className="badge badge-danger">Admin Area</span> 
                     </li>
                 </ul>
             </div>
