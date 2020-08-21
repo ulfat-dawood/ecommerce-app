@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 
 import Base from '../core/Base';
 import { isAuthenticated } from '../auth/helper';
+import {createCategory} from './helper/adminapicall';
 
 const AddCategory= ()=>{
     const [name, setName]= useState(''); 
@@ -11,13 +12,29 @@ const AddCategory= ()=>{
 
     const {user, token}= isAuthenticated(); 
 
+    const handleChange= (e)=>{
+        setError(''); //reset error as it might have value from previous transaction
+    }
+
+    const onSubmit=(event)=>{
+        event.preverntDefault(); 
+        setError('');
+        setSuccess(false)
+
+        //backend call:
+        createCategory(user._id, {name});//payload is object so pass: {name:name}
+    }
+
     const MyCategoryForm=()=>{
         return(
             <form>
                 <div className="form-group">
                     <p className="lead">Enter the category</p>
-                    <input type="text" className='form-control my-3' autoFocus required placeholder='for Ex. summer'/>
-                    <button className="btn btn-outline-info">Create Category</button>
+                    <input type="text" className='form-control my-3' 
+                    autoFocus required placeholder='for Ex. summer'
+                    onChange={handleChange}
+                    value={name}/>
+                    <button onClick={onSubmit} className="btn btn-outline-info">Create Category</button>
                 </div>
             </form>
         )
