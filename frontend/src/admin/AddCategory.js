@@ -14,15 +14,24 @@ const AddCategory= ()=>{
 
     const handleChange= (e)=>{
         setError(''); //reset error as it might have value from previous transaction
+        setName(e.target.value)
     }
 
     const onSubmit=(event)=>{
-        event.preverntDefault(); 
+        event.preventDefault(); 
         setError('');
         setSuccess(false)
 
         //backend call:
-        createCategory(user._id, {name});//payload is object so pass: {name:name}
+        //payload is object so pass: {name:name}
+        createCategory(user._id, token, {name}).then(data=>{
+            //console.log('data', data); 
+            // if(data.error)
+            //    setError(true);
+            // else
+            //    setError(''); 
+            //    setSuccess(true)
+        })
     }
 
     const MyCategoryForm=()=>{
