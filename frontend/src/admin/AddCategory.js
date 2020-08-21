@@ -1,10 +1,12 @@
 import React from 'react'
+import Base from '../core/Base'
 
 const AddCategory= ()=>{
     return(
-        <div>
-            <h1>Create a Category</h1>
-        </div>
+        <Base title='create a category here' description='add a new category for new tshirts'
+        className='container bg-info p-4'>
+        
+        </Base>
 
     )
 }
