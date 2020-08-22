@@ -20,6 +20,13 @@ export const createCategory = (userId, token, category) => {
       .catch(err => console.log(err));
   };
 
+export const getCategories = ()=>{
+  return fetch(`${API}/categories`, {
+    method:"GET"
+  }).then(response=> response.json())
+  .cathc(err => console.log(err))
+}
+
 export const createaProduct= (userId, token, product)=>{
   return fetch(`${API}/product/create/${userId}`, {
     method: "POST",
