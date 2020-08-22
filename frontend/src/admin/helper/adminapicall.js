@@ -59,4 +59,20 @@ export const createaProduct= (userId, token, product)=>{
   })
   .cathc(err=> console.log(err))
 }
- 
+
+export const updateProduct= (productId, userId, token, product)=>{
+  return fetch(`${API}/product/${productId}/${userId}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body:product
+    
+  })
+  .then(response =>{
+    return response.json();
+  })
+  .cathc(err=> console.log(err))
+}
