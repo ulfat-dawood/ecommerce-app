@@ -27,8 +27,17 @@ export const getCategories = ()=>{
   .cathc(err => console.log(err))
 }
 
+//Get list of All produts
 export const getProducts = ()=>{
   return fetch(`${API}/products`, {
+    method:"GET"
+  }).then(response=> response.json())
+  .cathc(err => console.log(err))
+}
+
+//Get a single product:
+export const getProduct = (productId)=>{
+  return fetch(`${API}/product/${productId}`, {
     method:"GET"
   }).then(response=> response.json())
   .cathc(err => console.log(err))
