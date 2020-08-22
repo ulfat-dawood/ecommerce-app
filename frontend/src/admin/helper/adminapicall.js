@@ -27,6 +27,13 @@ export const getCategories = ()=>{
   .cathc(err => console.log(err))
 }
 
+export const getProducts = ()=>{
+  return fetch(`${API}/products`, {
+    method:"GET"
+  }).then(response=> response.json())
+  .cathc(err => console.log(err))
+}
+
 export const createaProduct= (userId, token, product)=>{
   return fetch(`${API}/product/create/${userId}`, {
     method: "POST",
