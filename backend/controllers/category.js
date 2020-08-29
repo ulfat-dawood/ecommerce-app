@@ -57,7 +57,7 @@ exports.updateCategory = (req, res) => {
   };
 
 
-  exports.removeCategory = (req, res) => {
+exports.removeCategory = (req, res) => {
     const category = req.category;
   
     category.remove((err, category) => {
@@ -70,4 +70,4 @@ exports.updateCategory = (req, res) => {
         message: "Successfull deleted"
       });
     });
-  };
+};

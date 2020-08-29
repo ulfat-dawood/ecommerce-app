@@ -1,10 +1,10 @@
 import React from 'react'
 import Base from '../core/Base'
 
-const ManageCategories= ()=>{
+const ManageCategories= ()=>(
     <Base>
-        <h1 className="text-white"></h1>
+        <h1 className="text-white">assignment</h1>
     </Base>
-}
+)
 
 export default ManageCategories; 
