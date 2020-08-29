@@ -1,16 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom'; 
 
 import Base from '../core/Base'; 
 
 const AddProduct=()=>{
 
+    const [values, setValues]=useState({
+        name:'',
+        description:'',
+        price:'',
+        stock:''
+
+    })
+
+    const {name, description, price, stock}= values; 
+
     const onSubmit= ()=>{
 
     }
 
     const handleChange= name=> event=>{
-        
+
     }
 
     const createProductForm = () => (
@@ -87,7 +97,7 @@ const AddProduct=()=>{
             <Link to='/admin/dashboard' className='btn btn-md btn-dark mb-3'>Admin Home</Link>
             <div className="row bg-dark text-white rounded">
                 <div className="col-md8 offset-md-2">
-                    ho
+                    {createProductForm()}
                 </div>
             </div>
         </Base>
