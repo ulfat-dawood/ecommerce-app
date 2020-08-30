@@ -28,21 +28,20 @@ const AddProduct=()=>{
 
     const {name, description, price, stock,photo,categories,category,loading,error,createdProduct,getaRedirect,formData}= values; 
 
-    const preload= ()=>{
-        
-        getCategories().then(data=>{
-            if(data.error){
-                console.log('data',data)
-                setValues({...values, error:data.error})
-            }else{
-                setValues({...values, categories:data, formData: new FormData()})
-                 
-            }
-        })
-    }
+    const preload = () => {
+        getCategories().then(data => {
+          console.log('data',data);
+          if (data.error) {
+            setValues({ ...values, error: data.error });
+          } else {
+            setValues({ ...values, categories: data, formData: new FormData() });
+          }
+        });
+      };
 
     useEffect(() => {
         preload();
+        console.log('cate', categories)
     }, []);//runs only once on componentDidMount
 
     const onSubmit= ()=>{
@@ -50,7 +49,9 @@ const AddProduct=()=>{
     }
 
     const handleChange= name=> event=>{
-
+        const value= name === 'photo'? event.target.file[0] : event.target.value;
+        formData.set(name,value); 
+        setValues({...values, [name]: value})
     }
 
     const createProductForm = () => (
@@ -100,12 +101,10 @@ const AddProduct=()=>{
               className="form-control"
               placeholder="Category"
             >
-              <option>Select</option>
-              {/* <option value="a">a</option>
-              <option value="b">b</option> */}
+              <option>Select category</option>
               {categories &&
               categories.map((cate,index)=>(
-                <option key={index} value={cate}>a</option>
+                <option key={index} value={cate._id}>{cate.name}</option>
               ))}
             </select>
           </div>
