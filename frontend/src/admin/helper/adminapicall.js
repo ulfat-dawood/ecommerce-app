@@ -24,7 +24,7 @@ export const getCategories = ()=>{
   return fetch(`${API}/categories`, {
     method:"GET"
   }).then(response=> response.json())
-  .cathc(err => console.log(err))
+  .catch(err => console.log(err))
 }
 
 //Get list of All produts

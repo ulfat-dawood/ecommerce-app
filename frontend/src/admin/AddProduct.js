@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom'; 
 
 import Base from '../core/Base'; 
+import { getCategories } from './helper/adminapicall';
 
 const AddProduct=()=>{
 
@@ -22,6 +23,20 @@ const AddProduct=()=>{
     })
 
     const {name, description, price, stock,photo,categories,category,loading,error,createdProduct,getaRedirect,formData}= values; 
+
+    const preload= ()=>{
+        getCategories().then(data=>{
+            if(data.error){
+                setValues({...values, error:data.error})
+            }else{
+                setValues({...values, categories:data})
+            }
+        })
+    }
+
+    useEffect(()=>{
+        preload(); 
+    }, [])//renders only once on componentDidMount
 
     const onSubmit= ()=>{
 
