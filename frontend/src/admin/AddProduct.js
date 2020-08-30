@@ -9,11 +9,19 @@ const AddProduct=()=>{
         name:'',
         description:'',
         price:'',
-        stock:''
+        stock:'',
+        photo:'',
+        categories:[],
+        category:'',
+        loading:false,
+        error:'',
+        createdProduct:'',
+        getaRedirect:false,
+        formData:''
 
     })
 
-    const {name, description, price, stock}= values; 
+    const {name, description, price, stock,photo,categories,category,loading,error,createdProduct,getaRedirect,formData}= values; 
 
     const onSubmit= ()=>{
 
@@ -92,7 +100,7 @@ const AddProduct=()=>{
       );
 
     return(
-        <Base title='Add a product here' description='Product creation section'
+        <Base title='Add a produ ct here' description='Product creation section'
         className='container text-white bg-info p-4'>
             <Link to='/admin/dashboard' className='btn btn-md btn-dark mb-3'>Admin Home</Link>
             <div className="row bg-dark text-white rounded">
