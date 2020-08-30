@@ -3,8 +3,12 @@ import {Link} from 'react-router-dom';
 
 import Base from '../core/Base'; 
 import { getCategories } from './helper/adminapicall';
+import { isAuthenticated } from '../auth/helper';
+
 
 const AddProduct=()=>{
+
+    const {user, toeken}= isAuthenticated(); 
 
     const [values, setValues]=useState({
         name:'',
@@ -25,18 +29,21 @@ const AddProduct=()=>{
     const {name, description, price, stock,photo,categories,category,loading,error,createdProduct,getaRedirect,formData}= values; 
 
     const preload= ()=>{
+        
         getCategories().then(data=>{
             if(data.error){
+                console.log('data',data)
                 setValues({...values, error:data.error})
             }else{
-                setValues({...values, categories:data})
+                setValues({...values, categories:data, formData: new FormData()})
+                 
             }
         })
     }
 
-    useEffect(()=>{
-        preload(); 
-    }, [])//renders only once on componentDidMount
+    useEffect(() => {
+        preload();
+    }, []);//runs only once on componentDidMount
 
     const onSubmit= ()=>{
 
@@ -94,8 +101,12 @@ const AddProduct=()=>{
               placeholder="Category"
             >
               <option>Select</option>
-              <option value="a">a</option>
-              <option value="b">b</option>
+              {/* <option value="a">a</option>
+              <option value="b">b</option> */}
+              {categories &&
+              categories.map((cate,index)=>(
+                <option key={index} value={cate}>a</option>
+              ))}
             </select>
           </div>
           <div className="form-group">
@@ -113,7 +124,7 @@ const AddProduct=()=>{
           </button>
         </form>
       );
-
+    
     return(
         <Base title='Add a produ ct here' description='Product creation section'
         className='container text-white bg-info p-4'>
@@ -121,6 +132,7 @@ const AddProduct=()=>{
             <div className="row bg-dark text-white rounded">
                 <div className="col-md8 offset-md-2">
                     {createProductForm()}
+                    
                 </div>
             </div>
         </Base>
